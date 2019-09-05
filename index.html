@@ -8,35 +8,105 @@
 	  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	  crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/paper-full.js"></script>
+    <script type="text/paperscript" canvas="canvas">
+        // Adapted from the following Processing example:
+        // http://processing.org/learning/topics/follow3.html
+
+        // The amount of points in the path:
+        var points = 57;
+
+        // The distance between the points:
+        var length = 3;
+
+        var path = new Path({
+            strokeColor: '#E4141B',
+            strokeWidth: 20,
+            strokeCap: 'round'
+        });
+
+        var start = view.center / [10, 1];
+        for (var i = 0; i < points; i++)
+            path.add(start + new Point(i * length, 0));
+
+        function onMouseMove(event) {
+            path.firstSegment.point = event.point;
+            for (var i = 0; i < points - 1; i++) {
+                var segment = path.segments[i];
+                var nextSegment = segment.next;
+                var vector = segment.point - nextSegment.point;
+                vector.length = length;
+                nextSegment.point = segment.point - vector;
+            }
+            console.log(path.segments[0].point._x)
+            jQuery('.sundries_tile_1').css({left : path.segments[0].point._x})
+			jQuery('.sundries_tile_1').css({top : path.segments[0].point._y})
+			jQuery('.sundries_tile_2').css({left : path.segments[12].point._x})
+			jQuery('.sundries_tile_2').css({top : path.segments[12].point._y})
+			jQuery('.sundries_tile_3').css({left : path.segments[23].point._x})
+			jQuery('.sundries_tile_3').css({top : path.segments[23].point._y})
+			jQuery('.sundries_tile_4').css({left : path.segments[33].point._x})
+			jQuery('.sundries_tile_4').css({top : path.segments[33].point._y})
+			jQuery('.sundries_tile_5').css({left : path.segments[42].point._x})
+			jQuery('.sundries_tile_5').css({top : path.segments[42].point._y})
+			jQuery('.sundries_tile_6').css({left : path.segments[50].point._x})
+			jQuery('.sundries_tile_6').css({top : path.segments[50].point._y})
+			<!-- jQuery('.sundries_tile_7').css({left : path.segments[57].point._x}) -->
+			<!-- jQuery('.sundries_tile_7').css({top : path.segments[57].point._y}) -->
+        }
+
+        function onMouseDown(event) {
+            path.fullySelected = true;
+            path.strokeColor = '#e08285';
+        }
+
+        function onMouseUp(event) {
+            path.fullySelected = false;
+            path.strokeColor = '#e4141b';
+        }
+    </script>
 		</head>
 
 
 <body>
-<div id="page" class="site">
+    <canvas id="canvas" resize></canvas>
 	<div class="center">
-		<div class="image_whole_wrap">
-			<div class="image_whole_bg"></div>
-				<div class="image_whole kaleidoscope_image_whole">
-					<span class="sm_number">(<span class="space"></span>1<span class="space"></span>)</span>
-				</div>
-				<div class="image_whole polyhedrons_image_whole">
-					<span class="sm_number">(<span class="space"></span>2<span class="space"></span>)</span>
-				</div>
-				<div class="image_whole clocks_image_whole">
-					<span class="sm_number">(<span class="space"></span>3<span class="space"></span>)</span>
-				</div>
-				<div class="image_whole corners_image_whole">
-					<span class="sm_number">(<span class="space"></span>4<span class="space"></span>)</span>
-				</div>
-				<div class="image_whole sundries_image_whole">
-					<span class="sm_number">(<span class="space"></span>5<span class="space"></span>)</span>
-				</div>
-				<div class="image_whole plants_image_whole">
-					<div class="plants_ani_1"></div>
-					<span class="sm_number">(<span class="space"></span>6<span class="space"></span>)</span>
-				</div>		
-		</div>
+			<div>
+				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_1">
+				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_2">
+				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_3">
+				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_4">
+				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_5">
+				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_6">
+			</div>
 
+			<div class="plants_tile_image tile_image">
+				<div class="plants_ani_1"></div>
+			</div>	
+
+			<div class="tile_image kaleidoscope_tile_image">
+				<span class="sm_number">(2)</span>
+				<div class="image_sub kaleidoscope_image_sub_1">
+					<img src="img/kaleidoscope_ani_1.png">	
+				</div>
+				<div class="image_sub kaleidoscope_image_sub_2">
+					<img src="img/kaleidoscope_ani_2.png">	
+				</div>
+				<div class="image_sub kaleidoscope_image_sub_3">
+					<img src="img/kaleidoscope_ani_3.png">	
+				</div>
+				<div class="image_sub kaleidoscope_image_sub_4">
+				</div>
+			</div>
+
+			<div class="tile_image corners_tile_image">
+				<div class="corners_ani_1"></div>
+				<div class="corners_ani_2">
+					<div class="corners_ani_2_inner"></div>
+				</div>
+				<span class="sm_number">(2)</span>
+			</div>	
+		<div class="grid"></div>
 		<div class="text_whole_wrap">
 			<div class="schedule_wrap">
 				<div>
@@ -96,131 +166,27 @@
 			</div>
 			<div class="text_whole_sub_wrap">
 				<img class="logo" src="img/janchilogo.png">
+				<a class="sns_1" href=""><img class="sns_image" src="img/facebook.png"></a>
+				<a class="sns_2" href=""><img class="sns_image" src="img/instagram.png"></a>
+				<a class="sns_3" href=""><img class="sns_image" src="img/twitter.png"></a>
 				<img class="slash slash_left" src="img/slash.png">
 				<img class="slash slash_right" src="img/slash.png">
-				<div class="typography_and_objects typography_and_objects_kr">타이포그래피와 사물:</div>
-				<div class="typography_and_objects typography_and_objects_en"><br>Typography and Objects:</div>
-				<div  class="desktop">
-					<span class="text_whole kaleidoscope_text_whole"><br>만화경과Kaleidoscopes
-						<span class="sm_number">
-						(<span class="space"></span>1<span class="space"></span>)
-						</span>
-					</span>
-					<span class="text_whole polyhedrons_text_whole">,다면체와Polyhedrons
-						<span class="sm_number">
-						(<span class="space"></span>2<span class="space"></span>)
-						</span>
-					</span>
-					<span class="text_whole clocks_text_whole"><br>,시계와Clocks
-						<span class="sm_number">
-						(<span class="space"></span>3<span class="space"></span>)
-						</span>
-					</span>
-					<span class="text_whole corners_text_whole">,모서리와Corners
-						<span class="sm_number">
-						(<span class="space"></span>4<span class="space"></span>)
-						</span>
-					</span>
-					<span class="text_whole sundries_text_whole">,잡동사니와<br>Sundries
-						<span class="sm_number">
-						(<span class="space"></span>5<span class="space"></span>)
-						</span>
-					</span>
-					<span class="text_whole plants_text_whole">,and 식물들Plants
-						<span class="sm_number">
-						(<span class="space"></span>6<span class="space"></span>)
-						</span>
-					</span>
-				</div>
-				<div class="mobile">
-					<span class="text_whole kaleidoscope_text_whole">만화경과Kaleidoscopes
-						<span class="sm_number">
-						(<span class="space"></span>1<span class="space"></span>)
-						</span>,
-					</span>
-					<br>
-					<span class="text_whole polyhedrons_text_whole">다면체와Polyhedrons
-						<span class="sm_number">
-						(<span class="space"></span>2<span class="space"></span>)
-						</span>,
-					</span>
-					<br>
-					<span class="text_whole clocks_text_whole">시계와Clocks
-						<span class="sm_number">
-						(<span class="space"></span>3<span class="space"></span>)
-						</span>,
-					</span>
-					<br>
-					<span class="text_whole corners_text_whole">모서리와Corners
-						<span class="sm_number">
-						(<span class="space"></span>4<span class="space"></span>)
-						</span>,
-					</span>
-					<br>
-					<span class="text_whole sundries_text_whole">잡동사니와Sundries
-						<span class="sm_number">
-						(<span class="space"></span>5<span class="space"></span>)
-						</span>,
-					</span>
-					<br>
-					<span class="text_whole plants_text_whole">and 식물들Plants
-						<span class="sm_number">
-						(<span class="space"></span>6<span class="space"></span>)
-						</span>
-					</span>
-				</div>
+				D-30
 			</div>	
 			
 		</div>
-		</div>
-
-<div class="info_wrap multilingual">
-			<div>
-				2019 타이포잔치<br>
-				6회 국제 타이포그래피 비엔날레<br>
-				<span class="multi_en">Typojanchi 2019: 6th International Typography Biennale</span><br>
-				타이포그래피와 사물: 만화경과 다면체와 시계와 모서리와 잡동사니와 식물들<br>
-				<span class="multi_en">Kaleidoscopes, polyhedrons, clocks, corners, sundries, and plants</span><br>
-			</div>
-			<div>
-				<div class="info_title">날짜/시간 <span class="multi_en">Date/Time</span></div>
-				<span class="multi_en">2019</span>년 <span class="multi_en">10</span>월 <span class="multi_en">5</span>일<span class="multi_en"> – 11</span>월 <span class="multi_en">3</span>일<br>
-				오전 <span class="multi_en">10</span>시<span class="multi_en"> – </span>오후 <span class="multi_en">7</span>시<br>
-				휴관일 없음<br>
-				<span class="multi_en">Oct. 5 – Nov. 3, 2019</span><br>
-				<span class="multi_en">10:00 – 19:00</span><br>
-			</div>
-			<div>
-				<div class="info_title">장소 <span class="multi_en">Venue</span></div>
-				문화역서울 <span class="multi_en">284</span><br>
-				<span class="multi_en">Culture Station Seoul 284</span><br>
-				서울특별시 중구 통일로 <span class="multi_en">1</span><br>
-				<span class="multi_en">1, Tongil-ro, Jung-gu, Seoul, Republic of Korea</span><br>
-			</div>
-			<div>
-				<div class="info_title">관람료 <span class="multi_en">Admission</span></div>
-				없음 <span class="multi_en">Free</span><br>
-				<div class="info_title">오프닝 <span class="multi_en">Opening</span></div>
-				<span class="multi_en">2019</span>년 <span class="multi_en">10</span>월 <span class="multi_en">4</span>일<br>
-				<span class="multi_en">Oct. 4, 2019</span><br>
-			</div>
-			<div>
-				<div class="info_title"><span class="multi_en">SNS</span></div>
-				<a href=""><img class="sns_image" src="img/facebook.png"></a>
-				<a href=""><img class="sns_image" src="img/instagram.png"></a>
-				<a href=""><img class="sns_image" src="img/twitter.png"></a>
-				<div class="info_title"><a href="">타이포잔치2018-2019 Typojanchi saisai 2018-2019 website</a></div>
-			</div>
-			<div>
-				<div class="info_title">문의 <span class="multi_en">Contact</span></div>
-				<span class="multi_en">2019</span> 타이포잔치 사무국<br>
-				서울시 종로구 율곡로 <span class="multi_en">53</span> 혜영회관 <span class="multi_en">2</span>층 우<span class="multi_en">03060</span><br>
-				<span class="multi_en">Secretariat of Typojanchi 2019</span><br>
-				<span class="multi_en">2F, Haeyoung bldg., Yulgok-ro 53, Jongno-gu, Seoul, 03060, Republic of Korea</span><br>
-				<a href="mailto:typojanchi@kcdf.kr"><span class="multi_en">typojanchi@kcdf.kr</span></a>
-			</div>
-
-</div>
-
-</div><!-- #page -->=
+	</div>
+<svg width="0" height="0">
+	<defs>
+        <clipPath id="svgPath" clipPathUnits="objectBoundingBox">
+      		
+	<path class="st0" d="
+		M0.917,0.501
+		C0.917,0.287,0.748,0.1,0.497,0
+		C0.25,0.1,0.084,0.286,0.084,0.499
+		c0,0.214,0.169,0.402,0.419,0.501
+		C0.75,0.9,0.917,0.714,0.917,0.501z"/>
+        </clipPath>
+    </defs>
+</svg>
 </body></html>
