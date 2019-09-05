@@ -57,7 +57,7 @@ function rotate_clock(){
 
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-var ran_num = 1
+var ran_num = Math.floor(Math.random() * 6) 
 if(ran_num == 2 || ran_num == 3 ){ranpos()}
 if(ran_num == 5 ){ranpos_2()}
 if(ran_num == 4 ){ranpos_0()}
