@@ -9,15 +9,28 @@
 	  crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="js/paper-full.js"></script>
+	<script type="text/javascript">
+var isMobile = false; //initiate as false
+// device detection
+if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
+    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) { 
+    isMobile = true;
+}
+    if(isMobile){
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    }
+    </script>
     <script type="text/paperscript" canvas="canvas">
         // Adapted from the following Processing example:
         // http://processing.org/learning/topics/follow3.html
 
         // The amount of points in the path:
-        var points = 57;
+        var points = 58;
 
         // The distance between the points:
-        var length = 3;
+        var length = 4;
 
         var path = new Path({
             strokeColor: '#E4141B',
@@ -30,6 +43,7 @@
             path.add(start + new Point(i * length, 0));
 
         function onMouseMove(event) {
+        console.log()
             path.firstSegment.point = event.point;
             for (var i = 0; i < points - 1; i++) {
                 var segment = path.segments[i];
@@ -41,18 +55,18 @@
             console.log(path.segments[0].point._x)
             jQuery('.sundries_tile_1').css({left : path.segments[0].point._x})
 			jQuery('.sundries_tile_1').css({top : path.segments[0].point._y})
-			jQuery('.sundries_tile_2').css({left : path.segments[12].point._x})
-			jQuery('.sundries_tile_2').css({top : path.segments[12].point._y})
-			jQuery('.sundries_tile_3').css({left : path.segments[23].point._x})
-			jQuery('.sundries_tile_3').css({top : path.segments[23].point._y})
-			jQuery('.sundries_tile_4').css({left : path.segments[33].point._x})
-			jQuery('.sundries_tile_4').css({top : path.segments[33].point._y})
-			jQuery('.sundries_tile_5').css({left : path.segments[42].point._x})
-			jQuery('.sundries_tile_5').css({top : path.segments[42].point._y})
-			jQuery('.sundries_tile_6').css({left : path.segments[50].point._x})
-			jQuery('.sundries_tile_6').css({top : path.segments[50].point._y})
-			<!-- jQuery('.sundries_tile_7').css({left : path.segments[57].point._x}) -->
-			<!-- jQuery('.sundries_tile_7').css({top : path.segments[57].point._y}) -->
+			jQuery('.sundries_tile_2').css({left : path.segments[13].point._x})
+			jQuery('.sundries_tile_2').css({top : path.segments[13].point._y})
+			jQuery('.sundries_tile_3').css({left : path.segments[24].point._x})
+			jQuery('.sundries_tile_3').css({top : path.segments[24].point._y})
+			jQuery('.sundries_tile_4').css({left : path.segments[34].point._x})
+			jQuery('.sundries_tile_4').css({top : path.segments[34].point._y})
+			jQuery('.sundries_tile_5').css({left : path.segments[43].point._x})
+			jQuery('.sundries_tile_5').css({top : path.segments[43].point._y})
+			jQuery('.sundries_tile_6').css({left : path.segments[51].point._x})
+			jQuery('.sundries_tile_6').css({top : path.segments[51].point._y})
+			jQuery('.sundries_tile_7').css({left : path.segments[58].point._x})
+			jQuery('.sundries_tile_7').css({top : path.segments[58].point._y})
         }
 
         function onMouseDown(event) {
@@ -71,21 +85,80 @@
 <body>
     <canvas id="canvas" resize></canvas>
 	<div class="center">
-			<div>
+			<div class="sundries_tile_wrap sundries_tile_image tile_image">
 				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_1">
 				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_2">
 				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_3">
 				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_4">
 				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_5">
 				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_6">
+				<img src="img/sundries_tile.png" class="sundries_tile sundries_tile_7">
+				<img src="img/sundries_tile_s.png" class="sundries_tile_s sundries_tile_1">
+				<img src="img/sundries_tile_s.png" class="sundries_tile_s sundries_tile_2">
+				<img src="img/sundries_tile_s.png" class="sundries_tile_s sundries_tile_3">
+				<img src="img/sundries_tile_s.png" class="sundries_tile_s sundries_tile_4">
+				<img src="img/sundries_tile_s.png" class="sundries_tile_s sundries_tile_5">
+				<img src="img/sundries_tile_s.png" class="sundries_tile_s sundries_tile_6">
+				<img src="img/sundries_tile_s.png" class="sundries_tile_s sundries_tile_7">
 			</div>
 
+			<div class="polyhedrons_tile_image tile_image">
+				<img src="img/p/img_1.png" class="polyhedrons_tile polyhedrons_tile_1">
+				<img src="img/p/img_2.png" class="polyhedrons_tile polyhedrons_tile_2">
+				<img src="img/p/img_3.png" class="polyhedrons_tile polyhedrons_tile_3">
+				<img src="img/p/img_4.png" class="polyhedrons_tile polyhedrons_tile_4">
+				<img src="img/p/img_5.png" class="polyhedrons_tile polyhedrons_tile_5">
+				<img src="img/p/img_6.png" class="polyhedrons_tile polyhedrons_tile_6">
+				<img src="img/p/img_7.png" class="polyhedrons_tile polyhedrons_tile_7">
+				<img src="img/p/img_8.png" class="polyhedrons_tile polyhedrons_tile_8">
+				<img src="img/p/img_9.png" class="polyhedrons_tile polyhedrons_tile_9">
+				<img src="img/p/img_10.png" class="polyhedrons_tile polyhedrons_tile_10">
+				<img src="img/p/img_11.png" class="polyhedrons_tile polyhedrons_tile_11">
+				<img src="img/p/img_12.png" class="polyhedrons_tile polyhedrons_tile_12">
+				<img src="img/p/img_13.png" class="polyhedrons_tile polyhedrons_tile_13">
+				<img src="img/p/img_14.png" class="polyhedrons_tile polyhedrons_tile_14">
+				<img src="img/p/img_15.png" class="polyhedrons_tile polyhedrons_tile_15">
+				<img src="img/p/img_16.png" class="polyhedrons_tile polyhedrons_tile_16">
+				<img src="img/p/img_17.png" class="polyhedrons_tile polyhedrons_tile_17">
+				<img src="img/p/img_18.png" class="polyhedrons_tile polyhedrons_tile_18">
+				<img src="img/p/img_19.png" class="polyhedrons_tile polyhedrons_tile_19">
+				<img src="img/p/img_20.png" class="polyhedrons_tile polyhedrons_tile_20">
+				<img src="img/p/img_21.png" class="polyhedrons_tile polyhedrons_tile_21">
+				<img src="img/p/img_22.png" class="polyhedrons_tile polyhedrons_tile_22">
+
+				<img src="img/p/img_1_s.png" class="polyhedrons_tile_s polyhedrons_tile_1">
+				<img src="img/p/img_2_s.png" class="polyhedrons_tile_s polyhedrons_tile_2">
+				<img src="img/p/img_3_s.png" class="polyhedrons_tile_s polyhedrons_tile_3">
+				<img src="img/p/img_4_s.png" class="polyhedrons_tile_s polyhedrons_tile_4">
+				<img src="img/p/img_5_s.png" class="polyhedrons_tile_s polyhedrons_tile_5">
+				<img src="img/p/img_6_s.png" class="polyhedrons_tile_s polyhedrons_tile_6">
+				<img src="img/p/img_7_s.png" class="polyhedrons_tile_s polyhedrons_tile_7">
+				<img src="img/p/img_8_s.png" class="polyhedrons_tile_s polyhedrons_tile_8">
+				<img src="img/p/img_9_s.png" class="polyhedrons_tile_s polyhedrons_tile_9">
+				<img src="img/p/img_10_s.png" class="polyhedrons_tile_s polyhedrons_tile_10">
+				<img src="img/p/img_11_s.png" class="polyhedrons_tile_s polyhedrons_tile_11">
+				<img src="img/p/img_12_s.png" class="polyhedrons_tile_s polyhedrons_tile_12">
+				<img src="img/p/img_13_s.png" class="polyhedrons_tile_s polyhedrons_tile_13">
+				<img src="img/p/img_14_s.png" class="polyhedrons_tile_s polyhedrons_tile_14">
+				<img src="img/p/img_15_s.png" class="polyhedrons_tile_s polyhedrons_tile_15">
+				<img src="img/p/img_16_s.png" class="polyhedrons_tile_s polyhedrons_tile_16">
+				<img src="img/p/img_17_s.png" class="polyhedrons_tile_s polyhedrons_tile_17">
+				<img src="img/p/img_18_s.png" class="polyhedrons_tile_s polyhedrons_tile_18">
+				<img src="img/p/img_19_s.png" class="polyhedrons_tile_s polyhedrons_tile_19">
+				<img src="img/p/img_20_s.png" class="polyhedrons_tile_s polyhedrons_tile_20">
+				<img src="img/p/img_21_s.png" class="polyhedrons_tile_s polyhedrons_tile_21">
+				<img src="img/p/img_22_s.png" class="polyhedrons_tile_s polyhedrons_tile_22">
+			</div>
+
+			<div class="clocks_tile_image tile_image">
+				<img src="img/clocks.png">
+				<img src="img/clocks_s.png">
+			</div>
 			<div class="plants_tile_image tile_image">
 				<div class="plants_ani_1"></div>
 			</div>	
 
 			<div class="tile_image kaleidoscope_tile_image">
-				<span class="sm_number">(2)</span>
 				<div class="image_sub kaleidoscope_image_sub_1">
 					<img src="img/kaleidoscope_ani_1.png">	
 				</div>
@@ -104,19 +177,24 @@
 				<div class="corners_ani_2">
 					<div class="corners_ani_2_inner"></div>
 				</div>
-				<span class="sm_number">(2)</span>
 			</div>	
+
 		<div class="grid"></div>
+    			<div class="blue_edge blue_edge_1 blue_edge_1_animate"></div>
+    			<div class="blue_edge blue_edge_2 blue_edge_2_animate"></div>
+    			<div class="blue_edge blue_edge_3 blue_edge_3_animate"></div>
 		<div class="text_whole_wrap">
 			<div class="schedule_wrap">
 				<div>
 				<div class="schedule_kr schedule schedule_kr_1">
+    			<div class="blue blue_1"></div>
+    			<div class="blue blue_2"></div>
 					<div>
-						<div>2019</div> 
+						<div><span class="multi_en">2019</span></div> 
 						<div>타이포잔치:</div> 
 					</div>
 					<div>
-						<div>6회</div>
+						<div><span class="multi_en">6</span>회</div>
 						<div>국제</div>
 						<div>타이포그래피</div>
 						<div>비엔날레</div>
@@ -137,6 +215,8 @@
 				</div>
 				<div>
 				<div class="schedule_en schedule schedule_en_1">
+    			<div class="blue blue_1"></div>
+    			<div class="blue blue_2"></div>
 					<div>
 						<div>Typojanchi</div> 
 						<div>2019:</div> 
@@ -165,13 +245,13 @@
 				</div>
 			</div>
 			<div class="text_whole_sub_wrap">
-				<img class="logo" src="img/janchilogo.png">
-				<a class="sns_1" href=""><img class="sns_image" src="img/facebook.png"></a>
-				<a class="sns_2" href=""><img class="sns_image" src="img/instagram.png"></a>
-				<a class="sns_3" href=""><img class="sns_image" src="img/twitter.png"></a>
+				<a href="http://typojanchi.org/" class="logo" target="_blank" ><img class="logo" src="img/janchilogo.png"></a>
+				<a class="sns_1" href="https://www.facebook.com/typojanchi/" target="_blank"><img class="sns_image" src="img/facebook.png"></a>
+				<a class="sns_2" href="https://twitter.com/typojanchi" target="_blank"><img class="sns_image" src="img/instagram.png"></a>
+				<a class="sns_3" href="https://www.instagram.com/typojanchi/?hl=ko" target="_blank"><img class="sns_image" src="img/twitter.png"></a>
 				<img class="slash slash_left" src="img/slash.png">
 				<img class="slash slash_right" src="img/slash.png">
-				D-30
+				<span>D-30</span>
 			</div>	
 			
 		</div>
